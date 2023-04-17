@@ -226,18 +226,18 @@ class EventTiming:
         self.allday = allday
 
     def __str__(self):
+        display = ''
         if self.startdate == self.enddate:
             if self.allday:
-                display = str(self.startdate) + ' All Day'
+                display += str(self.startdate) + ' All Day'
             else:
-                display = 'Time : ' + str(self.starttime) + ' to ' + str(self.endtime)
-
+                display += 'Time : ' + str(self.starttime) + ' to ' + str(self.endtime)
         else:
             if self.allday:
-                display = 'Start : ' + str(self.startdate)
+                display += 'Start : ' + str(self.startdate)
                 display += '\nEnd : ' + str(self.enddate)
             else:
-                display = 'Start : ' + str(self.startdate) + ' ' + str(self.starttime)
+                display += 'Start : ' + str(self.startdate) + ' ' + str(self.starttime)
                 display += '\nEnd : ' + str(self.enddate) + ' ' + str(self.endtime)
         return display
     
@@ -286,6 +286,7 @@ class EventTiming:
                     print('ERROR - Enter a day or press ENTER')
                     X = True
         if y2 != '':
+            X = True
             while X:
                 try:
                     m2 = int(input('Month: '))
@@ -376,7 +377,7 @@ class Event:
     def User_Define(self):
         self.eventname = input('Event Name: ')
         self.eventdescription = input('Event Description: ')
-        self.eventtiming = self.eventtiming.User_Define()
+        self.eventtiming = self.eventtiming.User_Define(self)
 
 
 
@@ -514,7 +515,3 @@ def Fill_Year(year=2023):
         month = Month(i,days,year)
         months.append(month)
     return Year(year,months)
-
-y2024 = Fill_Year(2024)
-
-print(y2024.months[0])
