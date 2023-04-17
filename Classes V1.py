@@ -190,3 +190,65 @@ class Day(Month):
         # returns abbreviated string of events in day
         display = ('-- ' + str(self.dayNum) + str(self.dayNumStr) + ' : ' + str(self.eventCount) + ' events --')
         return display
+    
+    class Event:
+    def __init__(self, eventName='', eventDescription='', allDay=False, recurring=False, date=datetime.date(1,1,1)):
+        self.eventName = eventName
+        self.eventDescription = eventDescription
+        self.allDay = allDay
+        self.recurring = recurring
+        self.date = date
+
+    def __str__(self):
+        display = '\n'
+        display += '\t- ' + self.eventName + '-\n' + self.eventDescription 
+        display += '\nRecurring : ' 
+        if self.recurring:
+            display += 'yes'
+        else:
+            display += 'no'
+        display += '\nAll Day : '
+        if self.allDay:
+            display += 'yes'
+        else:
+            display += 'no'
+        display += '\n-----------'
+        return display
+    
+    def user_define(self):
+        self.eventName = input("Event Name: ")
+        self.eventDescription = input("Event Description: ")
+        dateyear = int(input('Enter date year: '))
+        datemonth = int(input('Enter date month: '))
+        dateday = int(input('Enter date day: '))
+        self.date = datetime.date(dateyear, datemonth, dateday)
+        ad = input("Is the event all day(enter 'yes' or 'no'): ")
+        if ad == 'yes':
+            self.allDay = True
+        elif ad == 'no':
+            self.allDay = False
+        rec = input("Is the event all day(enter 'yes' or 'no'): ")
+        if rec == 'yes':
+            self.recurring = True
+        elif rec == 'no':
+            self.recurring = False
+
+
+
+
+
+def fill_year(yearnum= Year):
+    for i in range(1,13):
+        yearnum.months.append(Month(i))
+    for x in yearnum.months:
+        if x.monthNum == 1 or 3 or 5 or 7 or 8 or 10 or 12:
+            for j in range(1,32):
+                x.days.append(Day(j))
+        elif x.monthNum == 4 or 6 or 9 or 11:
+            for j in range(1,31):
+                x.days.append(Day(j))
+        elif x.monthNum == 2:
+            for j in range(1,29):
+                x.days.append(Day(j))
+        else:
+            pass
