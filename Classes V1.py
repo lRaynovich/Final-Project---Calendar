@@ -3,6 +3,7 @@ first version of calendar classes for final project
 '''
 
 import pickle
+import datetime
 
 
 class Calendar:
@@ -191,7 +192,7 @@ class Day(Month):
         display = ('-- ' + str(self.dayNum) + str(self.dayNumStr) + ' : ' + str(self.eventCount) + ' events --')
         return display
     
-    class Event:
+class Event:
     def __init__(self, eventName='', eventDescription='', allDay=False, recurring=False, date=datetime.date(1,1,1)):
         self.eventName = eventName
         self.eventDescription = eventDescription
