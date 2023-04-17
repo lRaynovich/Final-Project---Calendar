@@ -53,6 +53,7 @@ class Year(Calendar):
     yearNum = int
     is_leap_year = bool
     months = list of objects of class Month
+    eventcount = int
     '''
     def __init__(self, yearNum=2023, is_leap_year=False, months=[]):
         # initialize Year object
@@ -78,3 +79,114 @@ class Year(Calendar):
         display += (str(self.yearNum) + ' : ' + str(self.eventCount) + ' events')
         display += ('\n' + ('*' * 20) + '\n')
         return display 
+    
+class Month(Year):
+    '''
+    Month class that inherits all attributes and methods from Year class
+    used to store all days in each month
+    attributes
+    monthnum = int
+    days = list of objects of class day
+    monthString = string
+    monthStringAbr = string
+    eventcount = int
+    '''
+    def __init__(self, monthNum = int, days=[]):
+        # initailize attributes
+        self.monthNum = monthNum
+        if monthNum == 1:
+            self.monthString = 'January'
+            self.monthStringAbr = 'Jan'
+        elif monthNum == 2:
+            self.monthString = 'February'
+            self.monthStringAbr = 'Feb'
+        elif monthNum == 3:
+            self.monthString = 'March'
+            self.monthStringAbr = 'Mar'
+        elif monthNum == 4:
+            self.monthString = 'April'
+            self.monthStringAbr = 'Apr'
+        elif monthNum == 5:
+            self.monthString = 'May'
+            self.monthStringAbr = 'May'
+        elif monthNum == 6:
+            self.monthString = 'June'
+            self.monthStringAbr = 'Jun'
+        elif monthNum == 7:
+            self.monthString = 'July'
+            self.monthStringAbr = 'Jul'
+        elif monthNum == 8:
+            self.monthString = 'August'
+            self.monthStringAbr = 'Aug'
+        elif monthNum == 9:
+            self.monthString = 'September'
+            self.monthStringAbr = 'Sep'
+        elif monthNum == 10:
+            self.monthString = 'October'
+            self.monthStringAbr = 'Oct'
+        elif monthNum == 11:
+            self.monthString = 'November'
+            self.monthStringAbr = 'Nov'
+        elif monthNum == 12:
+            self.monthString = 'December'
+            self.monthStringAbr = 'Dec'
+        else:
+            self.monthString = ''
+            self.monthStringAbr = ''
+        self.days = days
+        self.eventCount = 0
+        for day in self.days:
+            self.eventCount += day.eventCount
+        
+    def __str__(self):
+        # returns sting for printing calendar elements
+        display = ('\n**********\n' + str(self.monthString) + '\n**********\n')
+        for day in self.days:
+            display += str(day)
+        display += ('\n**********\n')
+        
+    def abbreviate(self):
+        # abbreviates month elements
+        display = ('\n**********\n')
+        display += (str(self.monthStringAbr) + ' : ' + str(self.eventCount) + ' events')
+        display += ('\n**********\n')
+        return display
+    
+class Day(Month):
+    '''
+    Class for all calendar events in a day that inherits all attributes and
+    methods of class month 
+    attributes
+    daynum = int
+    events = list of objects of class Event
+    daynumstr = string
+    '''
+    def __init__(self, dayNum=1, events = []):
+        # initialize class elements
+        self.dayNum =dayNum
+        self.events = events
+        self.dayNumStr = ''
+        if self.dayNum == (1 or 21 or 31):
+            self.dayNumStr = 'st'
+        elif self.dayNum == (2 or 22):
+            self.dayNumStr = 'nd'
+        elif self.dayNum == (3 or 23):
+            self.dayNumStr = 'rd'
+        else:
+            self.dayNumStr = 'th'
+        self.eventCount = 0
+        for event in self.events:
+            self.eventCount += 1
+
+    def __str__(self):
+        # returns string for all events in day
+        display = '-- ' + str(self.dayNum) + str(self.dayNumStr) + ' --'
+        for event in self.events:
+            display += str(event)
+        display += '----------'
+        return display
+        
+    def abbreviate(self):
+        # returns abbreviated string of events in day
+        display = ('-- ' + str(self.dayNum) + str(self.dayNumStr) + ' : ' + str(self.eventCount) + ' events --')
+        return display
