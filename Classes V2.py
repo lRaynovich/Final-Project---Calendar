@@ -10,7 +10,6 @@ class Time:
     def __init__(self,hours=1,minutes=0):
         self.hours = hours
         self.minutes = minutes
-        self.am = True
         # confine hours from 0-23 for 24 hour format
         if self.hours < 0:
             self.hours = 0
@@ -21,22 +20,26 @@ class Time:
             self.minutes = 0
         elif self.minutes > 59:
             self.minutes = 59
-        # change am hours to 12 hour format
-        if self.hours < 12:
-            self.am = True
-            if self.hours ==0:
-                self.hours = 12
-        # change pm hours to 12 hour format
-        elif self.hours >= 12:
-            self.am = False
-            if self.hours > 12:
-                self.hours -= 12
+        
 
     def __str__(self):
-        if self.am:
-            return str(self.hours) + ':' + str(self.minutes) + ' AM'
+        hourholder = self.hours
+        minuteholder = self.minutes
+        amholder = True
+         
+        if hourholder < 12:
+            amholder = True
+            if hourholder ==0:
+                hourholder = 12
+        # change pm hours to 12 hour format
+        elif hourholder >= 12:
+            amholder = False
+            if hourholder > 12:
+                hourholder -= 12
+        if amholder:
+            return str(hourholder) + ':' + str(self.minuteholder) + ' AM'
         else:
-            return str(self.hours) + ':' + str(self.minutes) + ' PM'
+            return str(hourholder) + ':' + str(self.minuteholder) + ' PM'
         
     def Add_Time(self,minutes=0,hours=0):
         if minutes < 0:
@@ -44,14 +47,21 @@ class Time:
         if hours < 0:
             hours = 0
         hours = hours + (minutes // 60)
-        addhalfdays = hours // 12
-        addhours = hours % 12
+        adddays = hours // 24
+        addhours = hours % 24
         addminutes = minutes % 60
-        if addhalfdays % 2 == 1:
-            if self.am:
-                self.am = False
-            else:
-                self.am = True
+        finalhours = self.hours + addhours
+        finalminutes = self.minutes + addminutes
+        if (finalminutes // 60) == 1:
+            finalhours += 1
+        if finalhours > 23:
+            adddays += 1
+            return adddays, addhours, addminutes
+        else:
+            return adddays, addhours, addminutes
+            
+
+        
         
         
         
@@ -62,7 +72,7 @@ class Time:
 
 
 class EventTiming:
-    def __init__(self,start):
+    def __init__(self,start=Time, Duration=):
 
 
     def __str__(self):
@@ -173,7 +183,53 @@ class Date:
         # returns abreviate date string with month and day
         return self.monthstrabr + ' ' + self.daystr
     
-    
+    def Next_Date(self, adddays):
+        days = adddays + self.day
+        while days > 0:
+            if self.month == 1 or self.month==3 or self.month==5 or self.month==7 or self.month==8 or self.month==10:
+                if days > 31:
+                    self.month += 1
+                    days -= 31
+                else:
+                    self.day = days
+                    days = days - days
+
+            elif self.month == 4 or self.month == 6 or self.month==9 or self.month==11:
+                if days > 30:
+                    self.month += 1
+                    days -= 30
+                else:
+                    self.day = days
+                    days = days - days
+
+            elif self.month == 2:
+                if self.leapyear:
+                    if days > 29:
+                        self.month += 1
+                        days -= 29
+                    else:
+                        self.day = days
+                        days = days - days
+                else:
+                    if days > 28:
+                        self.month += 1
+                        days -= 28
+                    else:
+                        self.day = days
+                        days = days - days
+            elif self.month == 12:
+                if days > 31:
+                    self.month = 1
+                    self.year += 1
+                    if self.year % 4 == 0:
+                        self.leapyear = True
+                    else:
+                        self.leapyear = False
+                    days -= 31
+                else:
+                    self.day = days
+                    days = days - days
+
 class Year:
     def __init__(self,year=2023,months=[]):
         self.year = year
@@ -253,3 +309,66 @@ class Day:
     def Abbreviate(self):
         return ('-- ' + self.date.daystr + ' : ' + str(self.eventCount) + ' events --')
     
+class Month:
+    def __init__(self,monthnum=1,days=[],year=2023):
+        self.monthnum = monthnum
+        self.days = days
+        self.year = year
+        self.eventCount = 0
+        for day in self.days:
+            self.eventCount += day.eventCount
+
+    def __str__(self):
+        display = ('\n**********\n' + self.days[0].date.monthstr + '\n**********\n')
+        for day in self.days:
+            display += '\n' + str(day.Abbreviate())
+        display += ('\n**********\n')
+        return display
+
+    def Abbreviate(self):
+        display = ('\n***************\n')
+        display += (self.days[0].date.monthstr + ' : ' + str(self.eventCount) + ' events')
+        display += ('\n***************\n')
+        return display
+
+
+
+'''
+class EventGroup:
+    def __init__(self):
+
+    def __str__(self):
+
+class Birthday(Event):
+    def __init__(self):
+
+    def __str__(self):
+
+class Week:
+    def __init__(self):
+
+    def __str__(self):'''
+
+def Fill_Year(year=2023):
+    months = []
+    for i in range(1,13):
+        days = []
+        if i==1 or i==3 or i==5 or i==7 or i==8 or i==10 or i==12:
+            x = 32
+        elif i==4 or i==6 or i==9 or i==11:
+            x = 31
+        else:
+            if year % 4 == 0:
+                x = 30
+            else:
+                x = 29
+        for j in range(1,x):
+            day = Day(Date(year,i,j))
+            days.append(day)
+        month = Month(i,days,year)
+        months.append(month)
+    return Year(year,months)
+
+y2024 = Fill_Year(2024)
+
+print(y2024.months[0])
