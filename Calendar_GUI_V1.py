@@ -46,12 +46,44 @@ class CalendarGUI:
             self.xx.destroy()
 
 
+class GUI:
+    def __init__(self):
+        self.window = tk.Tk()
+        self.window.title('CalendarNameVariable')
+        self.window.geometry('800x600')
+        self.create_file_button = tk.Button(self.window,height=40, width = 80, text='Create New File', font=('Arial', 16))
+        self.create_file_button.pack(padx=10,pady=10)
+        self.create_filename = tk.Entry(self.window, height = 10, width = 100)
+        self.create_filename.pack(padx=10,pady=10)
+        self.load_file_button = tk.Button(self.window,height=40, width = 80, text='Load Old File', font=('Arial', 16))
+        self.load_file_button.pack(padx=10,pady=10)
+        self.load_filename = tk.Entry(self.window, height = 10, width = 100)
+        self.load_filename.pack(padx=10,pady=10)
+        #self.frame = tk.Frame(self.window)
+        #elf.frame.pack()
+        self.window.protocol('WM_DELETE_WINDOW',self.on_closing)
+
+        #self.event_edit_frame.grid(row=0,column=0)
 
 
-CalendarGUI()
+        self.submit_button = tk.Button(self.window, height=20, width = 50)
 
+
+        self.window.mainloop()
+
+    def on_closing(self):
+        if messagebox.askyesno(title='Quit?', message='Are you sure you would like to exit?'):
+            if messagebox.askyesno(title='Save?', message='Would you like to save changes?'):
+                print('Saving Calendar . . .')
+                # insert save function
+                print('Calendar Saved!')
+            else:
+                print('Closing Calendar . . .')
+                print('Ending Program . . .')
+                self.xx.destroy()
 
   
+CalendarGUI()
 
 '''label1 = tk.Label(xx,text='Calendar Display', font=('Arial', 18))
 label1.pack(padx=10,pady=10)
