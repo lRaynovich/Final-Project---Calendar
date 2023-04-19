@@ -172,76 +172,86 @@ class Date:
     
     def Next_Date(self, adddays):
         days = adddays + self.day
+        finalyear = self.year
+        finalmonth = self.month
+        finalday = self.day
+        finalleapyear = self.leapyear
         while days > 0:
-            if self.month == 1 or self.month==3 or self.month==5 or self.month==7 or self.month==8 or self.month==10:
+            if finalmonth == 1 or finalmonth==3 or finalmonth==5 or finalmonth==7 or finalmonth==8 or finalmonth==10:
                 if days > 31:
-                    self.month += 1
+                    finalmonth += 1
                     days -= 31
                 else:
-                    self.day = days
+                    finalday = days
                     days = days - days
 
-            elif self.month == 4 or self.month == 6 or self.month==9 or self.month==11:
+            elif finalmonth == 4 or finalmonth== 6 or finalmonth==9 or finalmonth==11:
                 if days > 30:
-                    self.month += 1
+                    finalmonth += 1
                     days -= 30
                 else:
-                    self.day = days
+                    finalday = days
                     days = days - days
 
-            elif self.month == 2:
-                if self.leapyear:
+            elif finalmonth == 2:
+                if finalleapyear:
                     if days > 29:
-                        self.month += 1
+                        finalmonth += 1
                         days -= 29
                     else:
-                        self.day = days
+                        finalday = days
                         days = days - days
                 else:
                     if days > 28:
-                        self.month += 1
+                        finalmonth+= 1
                         days -= 28
                     else:
-                        self.day = days
+                        finalday = days
                         days = days - days
-            elif self.month == 12:
+            elif finalmonth == 12:
                 if days > 31:
-                    self.month = 1
-                    self.year += 1
-                    if self.year % 4 == 0:
-                        self.leapyear = True
+                    finalmonth = 1
+                    finalyear += 1
+                    if finalyear % 4 == 0:
+                        finalleapyear = True
                     else:
-                        self.leapyear = False
+                        finalleapyear = False
                     days -= 31
                 else:
-                    self.day = days
+                    finalday = days
                     days = days - days
+        return Date(finalyear,finalmonth,finalday)
 
     def Prev_Date(self,takedays):
-        days = self.day - takedays
+        finalyear = self.year
+        inalmonth = self.month
+        finalday = self.day
+        finalleapyear = self.leapyear
+        days = finalday - takedays
         while days < 0:
-            if self.month == 1:
-                self.year -= 1
-                if self.year % 4 == 0:
-                    self.leapyear = True
+            if inalmonth == 1:
+                finalyear -= 1
+                if finalyear % 4 == 0:
+                    finalleapyear = True
                 else:
-                    self.leapyear = False
+                    finalleapyear = False
                 days -= 31
-                self.month = 12
+                inalmonth = 12
                 days = 31 + days
-            elif self.month==2 or self.month==4 or self.month==6 or self.month==8 or self.month==9 or self.month == 11:
-                self.month = self.month - 1
+            elif inalmonth==2 or inalmonth==4 or inalmonth==6 or inalmonth==8 or inalmonth==9 or inalmonth == 11:
+                inalmonth = inalmonth - 1
                 days = 31 + days
-            elif self.month == 5 or self.month == 7 or self.month == 10 or self.month==12:
-                self.month = self.month - 1
+            elif inalmonth == 5 or inalmonth == 7 or inalmonth == 10 or inalmonth==12:
+                inalmonth = inalmonth - 1
                 days = 30 + days
-            elif self.month == 3:
-                self.month = 1
-                if self.leapyear:
+            elif inalmonth == 3:
+                inalmonth = 1
+                if finalleapyear:
                     days = 29 + days
                 else:
                     days = 28 + days
-        self.day = days
+        finalday= days
+        return Date(finalyear,inalmonth,finalday)
 
 
 
@@ -545,16 +555,16 @@ class Week:
             if dayinweek.month == 1 or dayinweek.month == 2:
                 y -= 1
         y = y % 7
-        dayinweek.Prev_Date(y-1)
-        startday = dayinweek
-        self.daysofweek.append(startday)
+        startday = dayinweek.Prev_Date((y-1))
+        self.daysofweek.append(str(startday))
         for i in range(1,7):
-            self.daysofweek.append(startday.Next_Date(i))
+            a = startday.Next_Date(i)
+            self.daysofweek.append(str(a))
 
     def __str__(self):
         display = ''
         for i in self.daysofweek:
-            display += str(i) + ' ' + str(self.daysofweek) + '\n'
+            display += str(i) + '\n'
         return display
 
 def Fill_Year(year=2023):
@@ -576,3 +586,7 @@ def Fill_Year(year=2023):
         month = Month(i,days,year)
         months.append(month)
     return Year(year,months)
+
+b = Date(2023,4,17)
+a = Week(b)
+print(a)
