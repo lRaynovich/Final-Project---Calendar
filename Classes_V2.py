@@ -6,6 +6,9 @@ python final project
 
 import pickle
 
+
+
+
 class Time:
     def __init__(self,hours=1,minutes=0):
         self.hours = hours
@@ -36,9 +39,63 @@ class Time:
             if hourholder > 12:
                 hourholder -= 12
         if amholder:
-            return str(hourholder) + ':' + str(self.minuteholder) + ' AM'
+            return str(hourholder) + ':' + str(minuteholder) + ' AM'
         else:
-            return str(hourholder) + ':' + str(self.minuteholder) + ' PM'
+            return str(hourholder) + ':' + str(minuteholder) + ' PM'
+        
+    def __le__(self,other):
+        if self.hours < other.hours:
+            return True
+        elif self.hours > other.hours:
+            return False
+        else:
+            if self.minutes < other.minutes:
+                return True
+            elif self.minutes > other.minutes:
+                return False
+            else:
+                True
+
+    def __le__(self,other):
+        if self.hours < other.hours:
+            return True
+        elif self.hours > other.hours:
+            return False
+        else:
+            if self.minutes < other.minutes:
+                return True
+            elif self.minutes > other.minutes:
+                return False
+            else:
+                False
+
+    def __ge__(self,other):
+        if self.hours > other.hours:
+            return True
+        elif self.hours < other.hours:
+            return False
+        else:
+            if self.minutes > other.minutes:
+                return True
+            elif self.minutes < other.minutes:
+                return False
+            else:
+                True
+
+    def __ge__(self,other):
+        if self.hours > other.hours:
+            return True
+        elif self.hours < other.hours:
+            return False
+        else:
+            if self.minutes > other.minutes:
+                return True
+            elif self.minutes < other.minutes:
+                return False
+            else:
+                False
+
+
         
     def Add_Time(self,minutes=0,hours=0):
         if minutes < 0:
@@ -157,6 +214,78 @@ class Date:
             return True
         else:
             return False
+        
+    def __le__(self,other):
+        if self.year < other.year:
+            return True
+        elif self.year > other.year:
+            return False
+        else:
+            if self.month < other.month:
+                return True
+            elif self.month > other.month:
+                return False
+            else:
+                if self.day < other.day:
+                    return True
+                elif self.day > other.day:
+                    return False
+                else:
+                    return True
+
+    def __lt__(self,other):
+        if self.year < other.year:
+            return True
+        elif self.year > other.year:
+            return False
+        else:
+            if self.month < other.month:
+                return True
+            elif self.month > other.month:
+                return False
+            else:
+                if self.day < other.day:
+                    return True
+                elif self.day > other.day:
+                    return False
+                else:
+                    return False
+
+    def __ge__(self,other):
+        if self.year > other.year:
+            return True
+        elif self.year < other.year:
+            return False
+        else:
+            if self.month > other.month:
+                return True
+            elif self.month < other.month:
+                return False
+            else:
+                if self.day > other.day:
+                    return True
+                elif self.day < other.day:
+                    return False
+                else:
+                    return True
+
+    def __gt__(self,other):
+        if self.year > other.year:
+            return True
+        elif self.year < other.year:
+            return False
+        else:
+            if self.month > other.month:
+                return True
+            elif self.month < other.month:
+                return False
+            else:
+                if self.day > other.day:
+                    return True
+                elif self.day < other.day:
+                    return False
+                else:
+                    return False
     
     def DayString(self):
         # returns day string
@@ -256,27 +385,20 @@ class Date:
 
 
 class EventTiming:
-    def __init__(self,starttime=Time, endtime=Time,startdate=Date,enddate=Date, allday=False):
+    def __init__(self,starttime=Time, endtime=Time,startdate=Date,enddate=Date):
         self.starttime = starttime
         self.endtime = endtime
         self.startdate = startdate
         self.enddate = enddate
-        self.allday = allday
+
 
     def __str__(self):
         display = ''
         if self.startdate == self.enddate:
-            if self.allday:
-                display += str(self.startdate) + ' All Day'
-            else:
                 display += 'Time : ' + str(self.starttime) + ' to ' + str(self.endtime)
         else:
-            if self.allday:
-                display += 'Start : ' + str(self.startdate)
-                display += '\nEnd : ' + str(self.enddate)
-            else:
-                display += 'Start : ' + str(self.startdate) + ' ' + str(self.starttime)
-                display += '\nEnd : ' + str(self.enddate) + ' ' + str(self.endtime)
+            display += 'Start : ' + str(self.startdate) + ' ' + str(self.starttime)
+            display += '\nEnd : ' + str(self.enddate) + ' ' + str(self.endtime)
         return display
     
     def User_Define(self):
@@ -408,8 +530,8 @@ class Event:
 
     def __str__(self):
         display = '-- ' + str(self.eventtiming) + ' --'
-        display += '\n* ' + self.eventname + ' *'
-        display += '\n' + self.eventdescription
+        display += '\n* ' + self.eventname 
+        display +=  self.eventdescription + '\n'
         return display
     
     def User_Define(self):
@@ -473,10 +595,31 @@ class Day:
         for event in self.events:
             self.eventCount += 1
 
+    def partition(self, A, p, r):
+        x = A[r]
+        i = p - 1
+        for j in range(p,r):
+            if A[j].eventtiming.starttime <= x.eventtiming.starttime:
+                i += 1
+                (A[i], A[j]) = (A[j], A[i])
+        (A[i+1], A[r]) = (A[r], A[i+1])
+        return(i+1)
+
+    
+    def quicksort(self,A, p, r):
+        if(p < r):
+            q = self.partition(A, p, r)
+            self.quicksort(A, p, q-1)
+            self.quicksort(A, q+1, r)
+
     def __str__(self):
-        display = '\n-- ' + self.date.DateString() + ' --'
-        for event in self.events:
-            display += event
+        A = self.events
+        self.quicksort(A, 0, len(A) - 1)
+
+
+        display = '\n-- ' + self.date.DateString() + ' --\n'
+        for e in A:
+            display += str(e) + '**********\n'
         return display
     
     def Abbreviate(self):
@@ -485,29 +628,62 @@ class Day:
 
 
 class Calendar:
-    def __init__(self,name='',description='',years=[]):
-        self.name = name
-        self.description = description
-        self.years = years
+    def __init__(self,events=[]):
+
+        self.events = events
+
+
+    def partition(self, A, p, r):
+        x = A[r]
+        i = p - 1
+        for j in range(p,r):
+            if A[j].eventtiming.startdate <= x.eventtiming.startdate:
+                i += 1
+                (A[i], A[j]) = (A[j], A[i])
+        (A[i+1], A[r]) = (A[r], A[i+1])
+        return(i+1)
+
+    
+    def quicksort(self,A, p, r):
+        if(p < r):
+            q = self.partition(A, p, r)
+            self.quicksort(A, p, q-1)
+            self.quicksort(A, q+1, r)
     
     def __str__(self):
-        display = ''
-        display += ('\n' + ('*' * 20) + '\n-- ' + self.name + ' --\n' + ('*' * 20) + '\n')
-        for year in self.years:
-            display += str(year)
+        display = '\n***************\n'
+        display += str(self.events[0]) + ':\n'
+        display += str(self.events[1])
+        display += '\n***************\n'
+
+        A = []
+        for i in range(2,len(self.events)):
+            A.append(self.events[i])
+
+        self.quicksort(A, 0, len(A) - 1)
+
+        X = [self.events[0],self.events[1]] + A
+
+
+        for i in range(2,len(X)):
+            display += str(X[i])
+            display += '-------------------\n'
         display += ('\n' + ('*' * 20) + '\n')
         return display
+
     
+    
+
     def save(self, fileName):
         with open(fileName, 'wb') as f:
             print('\n       Saving Calendar . . .\n')
-            pickle.dump(self, f)
+            pickle.dump(self.events, f)
             print('\n   Calendar Saved!\n')
 
     def load(self, fileName):
         with open(fileName, 'rb') as f:
             print('\n       Loading Calendar . . .\n')
-            pickle.load(f)
+            self.events = pickle.load(f)
             print('\n   Calendar Loaded!\n')
 
     def Add_Year(self,year=Year):

@@ -7,14 +7,6 @@ import datetime
 
 
 class Calendar:
-    '''
-    Calendar class for storing whole calendar object in one place
-    attributes:
-    calendar name
-    calendar description
-    year = list of objects with class Year
-    '''
-
     def __init__(self, calendarName='', calendarDescription='',years=[]):
         # initialize calendar object
         self.calendarName = calendarName
@@ -46,16 +38,6 @@ class Calendar:
 
 
 class Year(Calendar):
-    '''
-    Year class which inherits all methoda and functions of Calendar, 
-    year class stores all the months in the year which hold calendar
-    information for months
-    attributes:
-    yearNum = int
-    is_leap_year = bool
-    months = list of objects of class Month
-    eventcount = int
-    '''
     def __init__(self, yearNum=2023, is_leap_year=False, months=[]):
         # initialize Year object
         self.yearNum = yearNum
