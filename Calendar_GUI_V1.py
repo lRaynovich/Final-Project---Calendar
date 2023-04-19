@@ -6,46 +6,6 @@ import tkinter as tk
 import Classes_V2 as c
 from tkinter import messagebox
 
-class CalendarGUI:
-    def __init__(self):
-        self.xx = tk.Tk()
-        self.xx.geometry('1200x800')
-        self.xx.title('Calendar Window')
-
-        self.menubar = tk.Menu(self.xx)
-        self.filmenu = tk.Menu()
-
-        self.label1 = tk.Label(self.xx, text='Calendar Name: ', font=('Arial',18))
-        self.label1.place(x=30,y=10,height=20,width=200)
-        self.textbox1 = tk.Text(self.xx, height=1, font=('Arial',16))
-        self.textbox1.place(x=200,y=10,heigh=30,width=250)
-
-        self.checkstate1 = tk.IntVar()
-
-        self.check1 = tk.Checkbutton(self.xx, text='Show Calendar Name', font=('Arial',16), variable=self.checkstate1)
-        self.check1.place(x=600,y=10, height=30, width=250)
-
-        self.button1 = tk.Button(self.xx, text='Save', font=('Arial',16),command=self.show_message)
-        self.button1.place(x=30,y=150,height=50,width=100)
-
-        self.xx.protocol('WM_DELETE_WINDOW',self.on_closing)
- 
-
-        self.xx.mainloop()
-
-    def show_message(self):
-        if self.checkstate1.get()==0:
-            print(self.textbox1.get('1.0',tk.END))
-        else:
-            messagebox.showinfo(title='Message', message=self.textbox1.get('1.0',tk.END))
-
-    def on_closing(self):
-        if messagebox.askyesno(title='Quit?', message='Are you sure you would like to exit?'):
-            print('Closing Calendar . . .')
-            print('Ending Program . . .')
-            self.xx.destroy()
-
-
 class MyGUI:
     def __init__(self):
         self.filename = ''
@@ -101,14 +61,14 @@ class MyGUI:
         self.frame43 = tk.Frame(self.window)
         self.frame44 = tk.Frame(self.window)
         self.frame41.place(x=360,y=50)
-        self.frame42.place(x=450,y=50)
+        self.frame42.place(x=480,y=40)
         self.frame43.place(x=700,y=50)
-        self.frame44.place(x=530,y=20)
+        self.frame44.place(x=530,y=10)
 
 
         self.events_frame = tk.LabelFrame(self.window,text='Events',background='Gray')
         
-        self.events_label = tk.Text(self.events_frame,height=20,width=50,font=('Arial',10))
+        self.events_label = tk.Text(self.events_frame,height=23,width=47,font=('Arial',10))
         self.events_label.pack()
         
         # self.events_label.insert(tk.END,stext)
@@ -133,6 +93,7 @@ class MyGUI:
         self.year_label = tk.Label(self.frame42,height=1,width=10,text=str(self.year_select), font=('Arial',40))
 
         self.mode_year = tk.Button(self.frame44,height=1,width=4,text='years',command=self.back_to_year)
+        self.mode_month = tk.Button(self.frame44,height=1,width=4,text='months',command=self.back_to_month)
 
         self.control_buttons = []
         self.control_buttons.append(self.year_next)
@@ -177,37 +138,37 @@ class MyGUI:
 
         self.day_button_frame = tk.Frame(self.window)
         self.day_buttons = []
-        self.day_1 = tk.Button(self.day_button_frame,height=2,width=4, text='1st',font=('Arial', 16))
-        self.day_2 = tk.Button(self.day_button_frame,height=2,width=4, text='2nd',font=('Arial', 16))
-        self.day_3 = tk.Button(self.day_button_frame,height=2,width=4, text='3rd',font=('Arial', 16))
-        self.day_4 = tk.Button(self.day_button_frame,height=2,width=4, text='4th',font=('Arial', 16))
-        self.day_5 = tk.Button(self.day_button_frame,height=2,width=4, text='5th',font=('Arial', 16))
-        self.day_6 = tk.Button(self.day_button_frame,height=2,width=4, text='6th',font=('Arial', 16))
-        self.day_7 = tk.Button(self.day_button_frame,height=2,width=4, text='7th',font=('Arial', 16))
-        self.day_8 = tk.Button(self.day_button_frame,height=2,width=4, text='8th',font=('Arial', 16))
-        self.day_9 = tk.Button(self.day_button_frame,height=2,width=4, text='9th',font=('Arial', 16))
-        self.day_10 = tk.Button(self.day_button_frame,height=2,width=4, text='10th',font=('Arial', 16))
-        self.day_11 = tk.Button(self.day_button_frame,height=2,width=4, text='11th',font=('Arial', 16))
-        self.day_12 = tk.Button(self.day_button_frame,height=2,width=4, text='12th',font=('Arial', 16))
-        self.day_13 = tk.Button(self.day_button_frame,height=2,width=4, text='13th',font=('Arial', 16))
-        self.day_14 = tk.Button(self.day_button_frame,height=2,width=4, text='14th',font=('Arial', 16))
-        self.day_15 = tk.Button(self.day_button_frame,height=2,width=4, text='15th',font=('Arial', 16))
-        self.day_16 = tk.Button(self.day_button_frame,height=2,width=4, text='16th',font=('Arial', 16))
-        self.day_17 = tk.Button(self.day_button_frame,height=2,width=4, text='17th',font=('Arial', 16))
-        self.day_18 = tk.Button(self.day_button_frame,height=2,width=4, text='18th',font=('Arial', 16))
-        self.day_19 = tk.Button(self.day_button_frame,height=2,width=4, text='19th',font=('Arial', 16))
-        self.day_20 = tk.Button(self.day_button_frame,height=2,width=4, text='20th',font=('Arial', 16))
-        self.day_21 = tk.Button(self.day_button_frame,height=2,width=4, text='21st',font=('Arial', 16))
-        self.day_22 = tk.Button(self.day_button_frame,height=2,width=4, text='22nd',font=('Arial', 16))
-        self.day_23 = tk.Button(self.day_button_frame,height=2,width=4, text='23rd',font=('Arial', 16))
-        self.day_24 = tk.Button(self.day_button_frame,height=2,width=4, text='24th',font=('Arial', 16))
-        self.day_25 = tk.Button(self.day_button_frame,height=2,width=4, text='25th',font=('Arial', 16))
-        self.day_26 = tk.Button(self.day_button_frame,height=2,width=4, text='26th',font=('Arial', 16))
-        self.day_27 = tk.Button(self.day_button_frame,height=2,width=4, text='27th',font=('Arial', 16))
-        self.day_28 = tk.Button(self.day_button_frame,height=2,width=4, text='28th',font=('Arial', 16))
-        self.day_29 = tk.Button(self.day_button_frame,height=2,width=4, text='29th',font=('Arial', 16))
-        self.day_30 = tk.Button(self.day_button_frame,height=2,width=4, text='30th',font=('Arial', 16))
-        self.day_31 = tk.Button(self.day_button_frame,height=2,width=4, text='31st',font=('Arial', 16))
+        self.day_1 = tk.Button(self.day_button_frame,height=2,width=4, text='1st',font=('Arial', 16),command=self.day1)
+        self.day_2 = tk.Button(self.day_button_frame,height=2,width=4, text='2nd',font=('Arial', 16),command=self.day2)
+        self.day_3 = tk.Button(self.day_button_frame,height=2,width=4, text='3rd',font=('Arial', 16),command=self.day3)
+        self.day_4 = tk.Button(self.day_button_frame,height=2,width=4, text='4th',font=('Arial', 16),command=self.day4)
+        self.day_5 = tk.Button(self.day_button_frame,height=2,width=4, text='5th',font=('Arial', 16),command=self.day5)
+        self.day_6 = tk.Button(self.day_button_frame,height=2,width=4, text='6th',font=('Arial', 16),command=self.day6)
+        self.day_7 = tk.Button(self.day_button_frame,height=2,width=4, text='7th',font=('Arial', 16),command=self.day7)
+        self.day_8 = tk.Button(self.day_button_frame,height=2,width=4, text='8th',font=('Arial', 16),command=self.day8)
+        self.day_9 = tk.Button(self.day_button_frame,height=2,width=4, text='9th',font=('Arial', 16),command=self.day9)
+        self.day_10 = tk.Button(self.day_button_frame,height=2,width=4, text='10th',font=('Arial', 16),command=self.day10)
+        self.day_11 = tk.Button(self.day_button_frame,height=2,width=4, text='11th',font=('Arial', 16),command=self.day11)
+        self.day_12 = tk.Button(self.day_button_frame,height=2,width=4, text='12th',font=('Arial', 16),command=self.day12)
+        self.day_13 = tk.Button(self.day_button_frame,height=2,width=4, text='13th',font=('Arial', 16),command=self.day13)
+        self.day_14 = tk.Button(self.day_button_frame,height=2,width=4, text='14th',font=('Arial', 16),command=self.day14)
+        self.day_15 = tk.Button(self.day_button_frame,height=2,width=4, text='15th',font=('Arial', 16),command=self.day15)
+        self.day_16 = tk.Button(self.day_button_frame,height=2,width=4, text='16th',font=('Arial', 16),command=self.day16)
+        self.day_17 = tk.Button(self.day_button_frame,height=2,width=4, text='17th',font=('Arial', 16),command=self.day17)
+        self.day_18 = tk.Button(self.day_button_frame,height=2,width=4, text='18th',font=('Arial', 16),command=self.day18)
+        self.day_19 = tk.Button(self.day_button_frame,height=2,width=4, text='19th',font=('Arial', 16),command=self.day19)
+        self.day_20 = tk.Button(self.day_button_frame,height=2,width=4, text='20th',font=('Arial', 16),command=self.day20)
+        self.day_21 = tk.Button(self.day_button_frame,height=2,width=4, text='21st',font=('Arial', 16),command=self.day21)
+        self.day_22 = tk.Button(self.day_button_frame,height=2,width=4, text='22nd',font=('Arial', 16),command=self.day22)
+        self.day_23 = tk.Button(self.day_button_frame,height=2,width=4, text='23rd',font=('Arial', 16),command=self.day23)
+        self.day_24 = tk.Button(self.day_button_frame,height=2,width=4, text='24th',font=('Arial', 16),command=self.day24)
+        self.day_25 = tk.Button(self.day_button_frame,height=2,width=4, text='25th',font=('Arial', 16),command=self.day25)
+        self.day_26 = tk.Button(self.day_button_frame,height=2,width=4, text='26th',font=('Arial', 16),command=self.day26)
+        self.day_27 = tk.Button(self.day_button_frame,height=2,width=4, text='27th',font=('Arial', 16),command=self.day27)
+        self.day_28 = tk.Button(self.day_button_frame,height=2,width=4, text='28th',font=('Arial', 16),command=self.day28)
+        self.day_29 = tk.Button(self.day_button_frame,height=2,width=4, text='29th',font=('Arial', 16),command=self.day29)
+        self.day_30 = tk.Button(self.day_button_frame,height=2,width=4, text='30th',font=('Arial', 16),command=self.day30)
+        self.day_31 = tk.Button(self.day_button_frame,height=2,width=4, text='31st',font=('Arial', 16),command=self.day31)
 
         self.day_buttons.append(self.day_1)
         self.day_buttons.append(self.day_2)
@@ -246,7 +207,6 @@ class MyGUI:
        # self.day_buttons = []
        # for i in range(42):
         #    self.day_buttons.append(tk.Button(self.frame1,height=2, width = 10, text='Create New File', font=('Arial', 16),command=self.nav_day))
-        
 
         self.frame99 = tk.Frame(self.window)
         self.frame99.place(x=600,y=5)
@@ -320,12 +280,7 @@ class MyGUI:
         self.event_de.pack()
         self.event_desc = tk.Text(self.frame65,height=3, width=40, font=('Arial', 12))
         self.event_desc.pack()
-
-  
-
-
-
-
+        
         
         self.eventwindow = []
         self.eventwindow.append(self.frame64)
@@ -333,13 +288,6 @@ class MyGUI:
         self.eventwindow.append(self.frame62)
         self.eventwindow.append(self.frame63)
         self.eventwindow.append(self.frame66)
-
-
-
-
-        
-
-
 
 
         self.create_file_button = tk.Button(self.frame1,height=3, width = 16, text='Create New File', font=('Arial', 16),command=self.create_file)
@@ -362,13 +310,16 @@ class MyGUI:
         self.introduction = tk.Label(self.frame7,text=introtext,font=('Arial', 16))
         self.introduction.pack(padx=5,pady=5)
                                     
-
-
     
         self.window.protocol('WM_DELETE_WINDOW',self.on_closing)
 
 
         self.submit_button = tk.Button(self.window, height=20, width = 50)
+
+        self.day_textframe = tk.LabelFrame(self.window,text='Events')
+        self.day_textbox = tk.Text(self.day_textframe,width=61,height=24,font=('Arial',14))
+        self.day_textbox.pack()
+        
 
 
         self.window.mainloop()
@@ -399,7 +350,11 @@ class MyGUI:
         self.year_label.pack()
         self.ym_buttons.place_forget()
         x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
-        for i in range(31):
+        if c.Date(self.year_select).leapyear:
+            xx = 29
+        else:
+            xx = 28
+        for i in range(xx):
             m = (i  + x) % 7
             n = (i + x) // 7
             self.day_buttons[i].grid(row=n,column=m)
@@ -431,7 +386,7 @@ class MyGUI:
         self.year_label.pack()
         self.ym_buttons.place_forget()
         x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
-        for i in range(31):
+        for i in range(30):
             m = (i  + x) % 7
             n = (i + x) // 7
             self.day_buttons[i].grid(row=n,column=m)
@@ -463,7 +418,7 @@ class MyGUI:
         self.year_label.pack()
         self.ym_buttons.place_forget()
         x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
-        for i in range(31):
+        for i in range(30):
             m = (i  + x) % 7
             n = (i + x) // 7
             self.day_buttons[i].grid(row=n,column=m)
@@ -511,7 +466,7 @@ class MyGUI:
         self.year_label.pack()
         self.ym_buttons.place_forget()
         x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
-        for i in range(31):
+        for i in range(30):
             m = (i  + x) % 7
             n = (i + x) // 7
             self.day_buttons[i].grid(row=n,column=m)
@@ -543,7 +498,7 @@ class MyGUI:
         self.year_label.pack()
         self.ym_buttons.place_forget()
         x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
-        for i in range(31):
+        for i in range(30):
             m = (i  + x) % 7
             n = (i + x) // 7
             self.day_buttons[i].grid(row=n,column=m)
@@ -638,6 +593,8 @@ class MyGUI:
             self.cdesctextsave.pack()
             self.cdetailsedit.pack() 
             self.events_frame.place(x=5,y=220)
+            self.welcomepage = 1
+            
         else:
             messagebox.showinfo(title='ERROR',message="Filename must end in '.dat'")
 
@@ -661,6 +618,8 @@ class MyGUI:
             self.cdesctextsave.pack()
             self.cdetailsedit.pack()
             self.events_frame.place(x=5,y=220)
+            self.welcomepage = 1
+            
         else:
             messagebox.showinfo(title='ERROR',message="Filename must end in '.dat'")
 
@@ -684,7 +643,17 @@ class MyGUI:
             self.year_label = tk.Label(self.frame42,height=1,width=6,text=str(self.month_select)+'/'+str(self.year_select), font=('Arial',40))
             self.year_label.pack()
             x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
-            for i in range(31):
+            xx = 0
+            if self.month_select == 1 or self.month_select == 3 or self.month_select == 5 or self.month_select == 7 or self.month_select == 8 or self.month_select == 10 or self.month_select == 12:
+                xx = 31
+            elif self.month_select == 4 or self.month_select == 6 or self.month_select == 9 or self.month_select == 11:
+                xx = 30
+            elif self.month_select == 2:
+                if c.Date(self.year_select).leapyear:
+                    xx = 29
+                else:
+                    xx = 28
+            for i in range(xx):
                 m = (i  + x) % 7
                 n = (i + x) // 7
                 self.day_buttons[i].grid(row=n,column=m)
@@ -710,7 +679,17 @@ class MyGUI:
             self.year_label = tk.Label(self.frame42,height=1,width=6,text=str(self.month_select)+'/'+str(self.year_select), font=('Arial',40))
             self.year_label.pack()
             x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
-            for i in range(31):
+            xx = 0
+            if self.month_select == 1 or self.month_select == 3 or self.month_select == 5 or self.month_select == 7 or self.month_select == 8 or self.month_select == 10 or self.month_select == 12:
+                xx = 31
+            elif self.month_select == 4 or self.month_select == 6 or self.month_select == 9 or self.month_select == 11:
+                xx = 30
+            elif self.month_select == 2:
+                if c.Date(self.year_select).leapyear:
+                    xx = 29
+                else:
+                    xx = 28
+            for i in range(xx):
                 m = (i  + x) % 7
                 n = (i + x) // 7
                 self.day_buttons[i].grid(row=n,column=m)
@@ -725,17 +704,188 @@ class MyGUI:
         self.year_label.pack()
         self.ym_buttons.place(x=350,y=100)
 
+    def back_to_month(self):
+        self.year_prev.pack()
+        self.year_next.pack()
+        self.day_textframe.place_forget()
+        self.day_select = 0
+        self.mode_month.pack_forget()
+        self.year_label.pack_forget()
+        self.year_label = tk.Label(self.frame42,height=1,width=6,text=(str(self.month_select) + '/' + str(self.year_select)), font=('Arial',40))
+        self.year_label.pack()
+        for x in self.day_buttons:
+            x.grid_forget()
+        x = c.Day_Of_Week(c.Date(self.year_select,self.month_select,1))
+        xx = 0
+        if self.month_select == 1 or self.month_select == 3 or self.month_select == 5 or self.month_select == 7 or self.month_select == 8 or self.month_select == 10 or self.month_select == 12:
+            xx = 31
+        elif self.month_select == 4 or self.month_select == 6 or self.month_select == 9 or self.month_select == 11:
+            xx = 30
+        elif self.month_select == 2:
+            if c.Date(self.year_select).leapyear:
+                xx = 29
+            else:
+                xx = 28
+        for i in range(xx):
+            m = (i  + x) % 7
+            n = (i + x) // 7
+            self.day_buttons[i].grid(row=n,column=m)
+        self.day_button_frame.place(x=300,y=100)
+        self.mode_year.pack()
+
+
 
 
 
 
     def on_closing(self):
         if messagebox.askyesno(title='Quit?', message='Are you sure you would like to exit?'):
-            if messagebox.askyesno(title='Save?', message='Would you like to save changes?'):
-                self.calendar.save(self.filename)
-                self.window.destroy()
-            else:
-                self.window.destroy()
+            if self.welcomepage == 1:
+                if messagebox.askyesno(title='Save?', message='Would you like to save changes?'):
+                    self.calendar.save(self.filename)
+                    self.window.destroy()
+                else:
+                    self.window.destroy()
+            self.window.destroy()
+    
+    def day_page(self):
+        self.mode_year.pack_forget()
+        self.year_next.pack_forget()
+        self.year_prev.pack_forget()
+        self.mode_month.pack()
+        self.day_button_frame.place_forget()
+        self.day_textframe.place(x=300,y=90)
+        self.year_label.pack_forget()
+        self.year_label = tk.Label(self.frame42,height=1,width=10,text=(str(self.month_select) + '/' + str(self.day_select) + '/' + str(self.year_select)), font=('Arial',40))
+        self.year_label.pack()
+
+    
+
+    def day1(self):
+        self.day_select = 1
+        self.day_page()
+
+    def day2(self):
+        self.day_select = 2
+        self.day_page()
+
+    def day3(self):
+        self.day_select = 3
+        self.day_page()
+
+    def day4(self):
+        self.day_select = 4
+        self.day_page()
+
+    def day5(self):
+        self.day_select = 5
+        self.day_page()
+
+    def day6(self):
+        self.day_select = 6
+        self.day_page()
+
+    def day7(self):
+        self.day_select = 7
+        self.day_page()
+
+    def day8(self):
+        self.day_select = 8
+        self.day_page()
+
+    def day9(self):
+        self.day_select = 9
+        self.day_page()
+
+    def day10(self):
+        self.day_select = 10
+        self.day_page()
+
+    def day11(self):
+        self.day_select = 11
+        self.day_page()
+
+    def day12(self):
+        self.day_select = 12
+        self.day_page()
+
+    def day13(self):
+        self.day_select = 13
+        self.day_page()
+
+    def day14(self):
+        self.day_select = 14
+        self.day_page()
+
+    def day15(self):
+        self.day_select = 15
+        self.day_page()
+
+    def day16(self):
+        self.day_select = 16
+        self.day_page()
+
+    def day17(self):
+        self.day_select = 17
+        self.day_page()
+
+    def day18(self):
+        self.day_select = 18
+        self.day_page()
+
+    def day19(self):
+        self.day_select = 19
+        self.day_page()
+
+    def day20(self):
+        self.day_select = 20
+        self.day_page()
+
+    def day21(self):
+        self.day_select = 21
+        self.day_page()
+
+    def day22(self):
+        self.day_select = 22
+        self.day_page()
+
+    def day23(self):
+        self.day_select = 23
+        self.day_page()
+
+    def day24(self):
+        self.day_select = 24
+        self.day_page()
+
+    def day25(self):
+        self.day_select = 25
+        self.day_page()
+
+    def day26(self):
+        self.day_select = 26
+        self.day_page()
+
+    def day27(self):
+        self.day_select = 27
+        self.day_page()
+
+    def day28(self):
+        self.day_select = 28
+        self.day_page()
+
+    def day29(self):
+        self.day_select = 29
+        self.day_page()
+
+    def day30(self):
+        self.day_select = 30
+        self.day_page()
+
+    def day31(self):
+        self.day_select = 31
+        self.day_page()
+
+    
 
   
 MyGUI()

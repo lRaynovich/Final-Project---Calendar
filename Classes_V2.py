@@ -529,44 +529,6 @@ class Birthday(Event):
 
     def __str__(self):
 '''
-class Week:
-    def __init__(self,dayinweek=Date):
-        self.daysofweek = []
-        self.daysofweekstr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        x = str(dayinweek.year)
-        y = int(x[2:])
-        y = y + (y //4)
-        y += dayinweek.day
-        if dayinweek.month == 4 or dayinweek.month == 7:
-            y += 0
-        elif dayinweek.month == 1 or dayinweek.month == 10:
-            y += 1
-        elif dayinweek.month == 5:
-            y += 2
-        elif dayinweek.month == 8:
-            y += 3
-        elif dayinweek.month == 2 or dayinweek.month == 3 or dayinweek.month == 11:
-            y += 4
-        elif dayinweek.month == 6:
-            y += 5
-        elif dayinweek.month == 9 or dayinweek.month == 12:
-            y += 6
-        if dayinweek.leapyear:
-            if dayinweek.month == 1 or dayinweek.month == 2:
-                y -= 1
-        y = y % 7
-
-        startday = dayinweek.Prev_Date((y-1))
-        self.daysofweek.append(str(startday))
-        for i in range(1,7):
-            a = startday.Next_Date(i)
-            self.daysofweek.append(str(a))
-
-    def __str__(self):
-        display = ''
-        for i in self.daysofweek:
-            display += str(i) + '\n'
-        return display
 
 def Fill_Year(year=2023):
     months = []
