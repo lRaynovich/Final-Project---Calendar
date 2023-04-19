@@ -14,8 +14,9 @@ class MyGUI:
         self.day_select = 0
         self.calendar = c.Calendar()
         self.startdate = c.Date(2023,12,31)
+        self.calendar.events.append('')
+        self.calendar.events.append('')
 
-        self.calendar.years.append(c.Fill_Year())
         self.window = tk.Tk()
         self.window.title('CalendarNameVariable')
         self.window.geometry('800x500')
@@ -81,8 +82,8 @@ class MyGUI:
         self.cdesc = tk.Label(self.frame23,height=1,width=25,text='Calendar description:', font=('Arial', 16))
         self.cdesctext = tk.Text(self.frame23,height=5,width=45,font=('Arial', 12))
 
-        self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.name),font=('Arial', 14))
-        self.cdesctextsave = tk.Label(self.frame23,width=45,height=5,text=(self.calendar.description),font=('Arial',12))
+        self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.events[0]),font=('Arial', 14))
+        self.cdesctextsave = tk.Label(self.frame23,width=45,height=5,text=(self.calendar.events[1]),font=('Arial',12))
 
 
         self.cdetailssave = tk.Button(self.frame23,height=1,width=4, text='save',command=self.cdetails_save)
@@ -268,12 +269,19 @@ class MyGUI:
         self.event_name = tk.Text(self.frame64,height=1,width=40,font=('Arial', 12))
         self.event_name.pack()
 
-        self.event_save = tk.Button(self.frame66,height=1,width=4,text='exit',font=('Arial',14),command=self.exit_event)
+        self.event_save = tk.Button(self.frame66,height=1,width=4,text='save',font=('Arial',14),command=self.save_event)
         self.event_save.grid(row=0,column=0)
 
         self.event_exit = tk.Button(self.frame66,height=1,width=4,text='exit',font=('Arial',14),command=self.exit_event)
         self.event_exit.grid(row=0,column=1)
 
+        self.frame89 = tk.LabelFrame(self.window,text='Edit Event')
+        self.name_question = tk.Label(self.frame89,text='Event Name:', width=12,heightt=1,font=('Arial',14))
+        self.name_question_box = tk.Entry(self.frame89,width=20,font=('Arial',14))
+        self.name_confirm = tk.Button(self.frame89,text='enter',height=1,width=4,font=('Arial',14),command=self.edit_event)
+        self.name_question.grid(row=0,column=0)
+        self.name_question_box.grid(row=0,column=1)
+        self.name_confirm.grid(row=0,column=2)
 
 
         self.event_de = tk.Label(self.frame65, height=1, width=20, text='Event Description: ',font=('Arial', 14))
@@ -318,7 +326,10 @@ class MyGUI:
 
         self.day_textframe = tk.LabelFrame(self.window,text='Events')
         self.day_textbox = tk.Text(self.day_textframe,width=61,height=24,font=('Arial',14))
+        
         self.day_textbox.pack()
+
+
         
 
 
@@ -523,15 +534,15 @@ class MyGUI:
 
     
     def cdetails_save(self):
-        self.calendar.name = self.cnametext.get()
-        self.calendar.description = self.cdesctext.get('1.0',tk.END)
+        self.calendar.events[0] = self.cnametext.get()
+        self.calendar.events[1] = self.cdesctext.get('1.0',tk.END)
         self.cname.pack_forget()
         self.cnametext.pack_forget()
         self.cdesc.pack_forget()
         self.cdesctext.pack_forget()
         self.cdetailssave.pack_forget()
-        self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.name),font=('Arial', 14))
-        self.cdesctextsave = tk.Label(self.frame23,width=30,height=7,text=(self.calendar.description),font=('Arial',12))
+        self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.events[0]),font=('Arial', 14))
+        self.cdesctextsave = tk.Label(self.frame23,width=30,height=7,text=(self.calendar.events[1]),font=('Arial',12))
         self.cname.pack()
         self.cnametextsave.pack()
         self.cdesc.pack()
@@ -545,8 +556,8 @@ class MyGUI:
         self.cdesc.pack_forget()
         self.cdesctextsave.pack_forget()
         self.cdetailsedit.pack_forget()
-        self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.name),font=('Arial', 14))
-        self.cdesctextsave = tk.Label(self.frame23,width=30,height=7,text=(self.calendar.description),font=('Arial',12))
+        self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.events[0]),font=('Arial', 14))
+        self.cdesctextsave = tk.Label(self.frame23,width=30,height=7,text=(self.calendar.events[1]),font=('Arial',12))
         self.cname.pack()
         self.cnametext.pack()
         self.cdesc.pack()
@@ -556,18 +567,55 @@ class MyGUI:
 
     def save_event(self):
 
+        name = self.event_name.get('1.0',tk.END)
+        description = self.event_desc.get('1.0',tk.END)
+        startdate1 = c.Date(int(self.event_start_YYYY.get()),int(self.event_start_MM.get()),int(self.event_start_DD.get()))
+        enddate1 = c.Date(int(self.event_end_YYYY.get()),int(self.event_end_MM.get()),int(self.event_end_DD.get()))
+
+        starttime1 = c.Time(int(self.event_start_hour.get()),int(self.event_start_minute.get()))
+        endtime1 = c.Time(int(self.event_start_hour.get()),int(self.event_start_minute.get()))
+
+        eventtime = c.EventTiming(starttime1,endtime1,startdate1,enddate1)
+
+        event1 = c.Event(name,description,eventtime)
+
+        self.calendar.events.append(event1)
         for x in self.eventwindow:
             x.pack_forget()
         self.frame61.place_forget()
 
-    def exit_event(self):
         
+        self.events_label.delete('1.0',tk.END)
+        self.events_label.insert(tk.END,str(self.calendar))
+
+        if self.day_select != 0:
+            self.day_textframe.place(x=300,y=90)
+        
+    def find_edit(self):
+        self.frame89.place(x=600,y=5)
+
+
+    def edit_event(self):
+        found = False
+        delname = self.name_question_box.get()
+        self.frame89.place_forget()
+        for i in range(2,self.calendar.events):
+            if self.calendar.events[i].eventName == delname:
+                found = True
+                
+
+
+    def exit_event(self):
         for x in self.eventwindow:
             x.pack_forget()
         self.frame61.place_forget()
+        if self.day_select != 0:
+            self.day_textframe.place(x=300,y=90)
+        
 
 
     def add_event(self):
+        self.day_textframe.place_forget()
         self.frame61.place(x=250,y=100)
         for x in self.eventwindow:
             x.pack()
@@ -577,7 +625,6 @@ class MyGUI:
         self.filename = filename
         if filename[-4:] == '.dat':
             self.calendar.load(filename)
-            print(self.calendar.description)
             messagebox.showinfo(title='Loading . . .',message="Calendar Loaded!")
             for x in self.startwindow:
                 x.destroy()
@@ -585,13 +632,16 @@ class MyGUI:
                 y.pack()
             self.ym_buttons.place(x=350,y=100)
             self.event_add.pack()
-            self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.name),font=('Arial', 14))
-            self.cdesctextsave = tk.Label(self.frame23,width=30,height=7,text=(self.calendar.description),font=('Arial',12))
+            self.cnametextsave = tk.Label(self.frame23,width=20,height=1,text=(self.calendar.events[0]),font=('Arial', 14))
+            self.cdesctextsave = tk.Label(self.frame23,width=30,height=7,text=(self.calendar.events[1]),font=('Arial',12))
             self.cname.pack()
             self.cnametextsave.pack()
             self.cdesc.pack()
             self.cdesctextsave.pack()
             self.cdetailsedit.pack() 
+            self.events_label.delete('1.0',tk.END)
+            self.events_label.insert(tk.END,str(self.calendar))
+            
             self.events_frame.place(x=5,y=220)
             self.welcomepage = 1
             
@@ -617,6 +667,8 @@ class MyGUI:
             self.cdesc.pack()
             self.cdesctextsave.pack()
             self.cdetailsedit.pack()
+            self.events_label.delete('1.0',tk.END)
+            self.events_label.insert(tk.END,str(self.calendar))
             self.events_frame.place(x=5,y=220)
             self.welcomepage = 1
             
@@ -758,6 +810,19 @@ class MyGUI:
         self.year_label.pack_forget()
         self.year_label = tk.Label(self.frame42,height=1,width=10,text=(str(self.month_select) + '/' + str(self.day_select) + '/' + str(self.year_select)), font=('Arial',40))
         self.year_label.pack()
+        self.day_textbox.delete('1.0',tk.END)
+
+        X = []
+
+        date1 = c.Date(self.year_select,self.month_select,self.day_select)
+
+        for i in range(2,len(self.calendar.events)):
+            if self.calendar.events[i].eventtiming.startdate == date1:
+                X.append(self.calendar.events[i])
+        day1 = c.Day(date1,X)
+        self.day_textbox.insert(tk.END,str(day1))
+
+
 
     
 
