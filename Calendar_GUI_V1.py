@@ -276,7 +276,7 @@ class MyGUI:
         self.event_exit.grid(row=0,column=1)
 
         self.frame89 = tk.LabelFrame(self.window,text='Edit Event')
-        self.name_question = tk.Label(self.frame89,text='Event Name:', width=12,heightt=1,font=('Arial',14))
+        self.name_question = tk.Label(self.frame89,text='Event Name:', width=12,height=1,font=('Arial',14))
         self.name_question_box = tk.Entry(self.frame89,width=20,font=('Arial',14))
         self.name_confirm = tk.Button(self.frame89,text='enter',height=1,width=4,font=('Arial',14),command=self.edit_event)
         self.name_question.grid(row=0,column=0)
@@ -531,7 +531,6 @@ class MyGUI:
             self.day_buttons[i].grid(row=n,column=m)
         self.day_button_frame.place(x=300,y=100)
 
-
     
     def cdetails_save(self):
         self.calendar.events[0] = self.cnametext.get()
@@ -602,7 +601,6 @@ class MyGUI:
         for i in range(2,self.calendar.events):
             if self.calendar.events[i].eventName == delname:
                 found = True
-                
 
 
     def exit_event(self):
@@ -612,7 +610,6 @@ class MyGUI:
         if self.day_select != 0:
             self.day_textframe.place(x=300,y=90)
         
-
 
     def add_event(self):
         self.day_textframe.place_forget()
@@ -647,7 +644,6 @@ class MyGUI:
             
         else:
             messagebox.showinfo(title='ERROR',message="Filename must end in '.dat'")
-
 
 
     def create_file(self):
@@ -786,10 +782,6 @@ class MyGUI:
         self.mode_year.pack()
 
 
-
-
-
-
     def on_closing(self):
         if messagebox.askyesno(title='Quit?', message='Are you sure you would like to exit?'):
             if self.welcomepage == 1:
@@ -800,6 +792,7 @@ class MyGUI:
                     self.window.destroy()
             self.window.destroy()
     
+
     def day_page(self):
         self.mode_year.pack_forget()
         self.year_next.pack_forget()
@@ -822,9 +815,6 @@ class MyGUI:
         day1 = c.Day(date1,X)
         self.day_textbox.insert(tk.END,str(day1))
 
-
-
-    
 
     def day1(self):
         self.day_select = 1
@@ -951,19 +941,4 @@ class MyGUI:
         self.day_page()
 
     
-
-  
 MyGUI()
-
-'''label1 = tk.Label(xx,text='Calendar Display', font=('Arial', 18))
-label1.pack(padx=10,pady=10)
-
-textbox1 = tk.Text(xx,height=5, width=5,font=('Arial',14)) 
-textbox1.pack(padx=10,pady=10)
-
-entrybox = tk.Entry(xx)
-entrybox.pack(padx=5)
-button = tk.Button(xx,text='Save', font=('Helvetica',18))
-button.pack(pady=40)
-
-xx.mainloop()'''

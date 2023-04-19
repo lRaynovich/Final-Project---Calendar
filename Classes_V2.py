@@ -395,6 +395,7 @@ class EventTiming:
     def __str__(self):
         display = ''
         if self.startdate == self.enddate:
+                display += 'Date : ' + str(self.startdate) + '  '
                 display += 'Time : ' + str(self.starttime) + ' to ' + str(self.endtime)
         else:
             display += 'Start : ' + str(self.startdate) + ' ' + str(self.starttime)
@@ -540,7 +541,6 @@ class Event:
         self.eventtiming = self.eventtiming.User_Define(self)
 
 
-
 class Year:
     def __init__(self,year=2023,months=[]):
         self.year = year
@@ -626,7 +626,6 @@ class Day:
         return ('-- ' + self.date.daystr + ' : ' + str(self.eventCount) + ' events --')
 
 
-
 class Calendar:
     def __init__(self,events=[]):
 
@@ -671,8 +670,6 @@ class Calendar:
         display += ('\n' + ('*' * 20) + '\n')
         return display
 
-    
-    
 
     def save(self, fileName):
         with open(fileName, 'wb') as f:
@@ -688,11 +685,6 @@ class Calendar:
 
     def Add_Year(self,year=Year):
         self.years.append(year)
-
-
-#   def Add_Event(self,event=Event):
-#      self.events
-
 
 '''
 class EventGroup:
@@ -752,6 +744,3 @@ def Day_Of_Week(dayinweek=Date):
 
     y = y % 7
     return y
-
-'''a = Date(2023,4,20)
-print(Day_Of_Week(a))'''
