@@ -1,6 +1,9 @@
 '''
-
+This module stores the event timing class for 
+storing all information for an events timing
 '''
+
+#import needed modules
 
 import Class_Date as D
 import Class_Time as T
@@ -11,7 +14,6 @@ class EventTiming(T.Time):
         self.endtime = endtime
         self.startdate = startdate
         self.enddate = enddate
-
 
     def __str__(self):
         display = ''

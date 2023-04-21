@@ -1,5 +1,6 @@
 '''
-
+This module stores the custom date class for 
+storing all information of date
 '''
 
 class Date:

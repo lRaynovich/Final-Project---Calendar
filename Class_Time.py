@@ -1,5 +1,6 @@
 '''
-
+This module stores the custom time class for 
+storing all information of time
 '''
 
 class Time:
