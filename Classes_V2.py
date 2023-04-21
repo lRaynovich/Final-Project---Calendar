@@ -3,11 +3,7 @@ second version of the calendar classes for
 python final project
 '''
 
-
 import pickle
-
-
-
 
 class Time:
     def __init__(self,hours=1,minutes=0):
@@ -504,15 +500,6 @@ class EventTiming:
                     print('ERROR - enter minute #')
                     X = True
             self.endtime = Time(h,mi)
-
-
-
-
-
-
-
-
-
 
 
 ''''
