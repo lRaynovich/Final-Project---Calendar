@@ -27,7 +27,7 @@ class MyGUI:
         self.frame4 = tk.Frame(self.window)
         self.frame7 = tk.Frame(self.window)
 
-        # Frames for welcome page
+
         self.frame1.place(x=500,y=100)
         self.frame2.place(x=450,y=200)
         self.frame3.place(x=520,y=200)
@@ -563,7 +563,9 @@ class MyGUI:
         self.cdesctext.pack()
         self.cdetailssave.pack()
 
-
+# 43.05
+# 26.95 - 67.375
+# 36.95 - 92.375
     def save_event(self):
 
         name = self.event_name.get('1.0',tk.END)
@@ -810,7 +812,7 @@ class MyGUI:
         date1 = c.Date(self.year_select,self.month_select,self.day_select)
 
         for i in range(2,len(self.calendar.events)):
-            if self.calendar.events[i].eventtiming.startdate == date1:
+            if self.calendar.events[i].eventtiming.startdate == date1 or (self.calendar.events[i].eventtiming.startdate < date1 and self.calendar.events[i].eventtiming.enddate >= date1):
                 X.append(self.calendar.events[i])
         day1 = c.Day(date1,X)
         self.day_textbox.insert(tk.END,str(day1))
