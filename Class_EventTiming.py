@@ -11,7 +11,7 @@ class EventTiming(T.Time):
     '''
     Class for storing event time details also inherites time
     Attributes:
-        statttime : Time object
+        starttime : Time object
         endtime : Time object
         startdate : Date object
         enddate : Date object

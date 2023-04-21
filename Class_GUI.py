@@ -64,6 +64,7 @@ class MyGUI:
         '''
         # initialize all normal attributes and 
         self.filename = ''
+        self.welcomepage = 0
         self.year_select = 2023
         self.month_select = 0
         self.day_select = 0
@@ -74,7 +75,7 @@ class MyGUI:
 
         # Establishes window and sets title and size
         self.window = tk.Tk()
-        self.window.title('CalendarNameVariable')
+        self.window.title('Calendar')
         self.window.geometry('800x500')
 
         # Create first set of frames
