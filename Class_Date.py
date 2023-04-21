@@ -4,6 +4,29 @@ storing all information of date
 '''
 
 class Date:
+    '''
+    Custom Date class for storing date information
+    Attributes:
+        year : int
+        month : int
+        day : int
+        monthstr : string
+        monthstrabr : string
+        leapyear : bool
+    Methods:
+        __init__ : initializes class
+        __str__ : returns string of class information
+        __eq__ : overload operator for equal
+        __lt__ : overload operator for less than
+        __gt__ : overload operator for greater than
+        __le__ : overload operator for less than or equal to
+        __ge__ : overload operator for greater than or equal to
+        daystr : returns string of day format
+        datestr : returns string of date format
+        datestrabr : returns string of date abbreviated format
+        next_date : returns Date object of next date 
+        prev_date : returns Date object of previous date
+    '''
     def __init__(self,year=1,month=1,day=1):
         # set values equal to arguments
         self.year = year
@@ -96,12 +119,14 @@ class Date:
         return str(self.month) + '/' + str(self.day) + '/' + str(self.year)
     
     def __eq__(self, other):
+        # overload operator for equal
         if self.day == other.day and self.month == other.month and self.year == other.year:
             return True
         else:
             return False
         
     def __le__(self,other):
+        # overload operator for less than or equal to 
         if self.year < other.year:
             return True
         elif self.year > other.year:
@@ -120,6 +145,7 @@ class Date:
                     return True
 
     def __lt__(self,other):
+        # overload operator for less than
         if self.year < other.year:
             return True
         elif self.year > other.year:
@@ -138,6 +164,7 @@ class Date:
                     return False
 
     def __ge__(self,other):
+        # overload operator for greater than or equal to
         if self.year > other.year:
             return True
         elif self.year < other.year:
@@ -156,6 +183,7 @@ class Date:
                     return True
 
     def __gt__(self,other):
+        # overload operator for greater than
         if self.year > other.year:
             return True
         elif self.year < other.year:
@@ -186,6 +214,7 @@ class Date:
         return self.monthstrabr + ' ' + self.daystr
     
     def Next_Date(self, adddays):
+        # returns nect date based on how many days input adds
         days = adddays + self.day
         finalyear = self.year
         finalmonth = self.month
@@ -238,6 +267,7 @@ class Date:
         return Date(finalyear,finalmonth,finalday)
 
     def Prev_Date(self,takedays):
+        # returns date based on how many days user takes off
         finalyear = self.year
         inalmonth = self.month
         finalday = self.day

@@ -66,7 +66,7 @@ def Fill_Year(year=2023):
         months.append(month)
     return Y.Year(year,months)
 
-def Day_Of_Week(dayinweek=ET.Date):
+def Day_Of_Week(dayinweek=D.Date):
     '''
     method for returning day of the week number 0-6 based 
     on Date object passed as argument 1

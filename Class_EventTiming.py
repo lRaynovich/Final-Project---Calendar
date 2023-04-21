@@ -4,18 +4,31 @@ storing all information for an events timing
 '''
 
 #import needed modules
-
 import Class_Date as D
 import Class_Time as T
 
 class EventTiming(T.Time):
+    '''
+    Class for storing event time details also inherites time
+    Attributes:
+        statttime : Time object
+        endtime : Time object
+        startdate : Date object
+        enddate : Date object
+    Methods:
+        __init__ : initializes class
+        __str__ : returns string of event timing
+        User_define : allows user input to define class
+    '''
     def __init__(self,starttime=T.Time, endtime=T.Time,startdate=D.Date,enddate=D.Date):
+        # initializes
         self.starttime = starttime
         self.endtime = endtime
         self.startdate = startdate
         self.enddate = enddate
 
     def __str__(self):
+        # returns string of event timing details
         display = ''
         if self.startdate == self.enddate:
                 display += 'Date : ' + str(self.startdate) + '  '
@@ -26,6 +39,7 @@ class EventTiming(T.Time):
         return display
     
     def User_Define(self):
+        # uses user input to define class - used for testing class before GUI
         self.allday = input("All day?(Enter 'y' or 'n') ")
         while self.allday != 'y' and self.allday != 'n':
             self.allday = input("Enter 'y' or 'n' for yes or no: ")

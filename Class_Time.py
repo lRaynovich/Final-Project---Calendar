@@ -4,6 +4,22 @@ storing all information of time
 '''
 
 class Time:
+    '''
+    Custom class for storing time information
+    Attributes:
+        hours : int
+        minutes : int
+    Methods : 
+        __init__ : initializes class
+        __str__ : returns string of class information
+        __eq__ : overload operator for equal
+        __lt__ : overload operator for less than
+        __gt__ : overload operator for greater than
+        __le__ : overload operator for less than or equal to
+        __ge__ : overload operator for greater than or equal to
+        Add_Time : returns Time object with added time
+    '''
+
     def __init__(self,hours=1,minutes=0):
         self.hours = hours
         self.minutes = minutes
@@ -38,6 +54,7 @@ class Time:
             return str(hourholder) + ':' + str(minuteholder) + ' PM'
         
     def __le__(self,other):
+        # overload operator for less than or equal to
         if self.hours < other.hours:
             return True
         elif self.hours > other.hours:
@@ -50,7 +67,8 @@ class Time:
             else:
                 True
 
-    def __le__(self,other):
+    def __lt__(self,other):
+        # overload operator for less than
         if self.hours < other.hours:
             return True
         elif self.hours > other.hours:
@@ -64,6 +82,7 @@ class Time:
                 False
 
     def __ge__(self,other):
+        # overload operator for greater than
         if self.hours > other.hours:
             return True
         elif self.hours < other.hours:
@@ -76,7 +95,8 @@ class Time:
             else:
                 True
 
-    def __ge__(self,other):
+    def __gt__(self,other):
+        # overload operator for greater than or equal to
         if self.hours > other.hours:
             return True
         elif self.hours < other.hours:
@@ -92,6 +112,7 @@ class Time:
 
         
     def Add_Time(self,minutes=0,hours=0):
+        # method that returns information for creating new Time object based on add time
         if minutes < 0:
             minutes = 0
         if hours < 0:
