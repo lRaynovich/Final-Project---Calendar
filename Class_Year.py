@@ -2,6 +2,8 @@
 
 '''
 
+import Class_Month as M
+
 class Year:
     def __init__(self,year=2023,months=[]):
         self.year = year
@@ -23,3 +25,6 @@ class Year:
         display += (str(self.months[0].days[0].date.year) + ' : ' + str(self.eventCount) + ' events')
         display += ('\n***************\n')
         return display
+    
+    def Add_Month(self,month=M.Month):
+        self.months.append(month)

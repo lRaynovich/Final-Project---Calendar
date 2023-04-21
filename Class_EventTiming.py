@@ -5,7 +5,7 @@
 import Class_Date as D
 import Class_Time as T
 
-class EventTiming:
+class EventTiming(T.Time):
     def __init__(self,starttime=T.Time, endtime=T.Time,startdate=D.Date,enddate=D.Date):
         self.starttime = starttime
         self.endtime = endtime
